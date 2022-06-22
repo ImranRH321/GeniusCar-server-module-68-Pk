@@ -59,9 +59,17 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
       app.post('/order', async (req, res) => {
          const order = req.body;
          const result = await orderCollection.insertOne(order)
-         console.log('res', result);
           res.send(result)
       })
+
+      /* all database for data server for client side  */
+      app.get('/order', async (req, res) => {
+        const email = req.query.email;
+        const query = {email:email}
+        const cursor = orderCollection.find(query)
+        const result = await cursor.toArray()
+        res.send(result)
+     })
    } 
    finally{
     
