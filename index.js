@@ -4,6 +4,7 @@ const ObjectId  = require('mongodb').ObjectId
 const app = express()
 const cors = require('cors');
 require('dotenv').config()
+const jwt = require('jsonwebtoken');
 
 const port = process.env.PORT || 5000
 // middleware 
@@ -20,6 +21,17 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
     const serviceCollection = client.db('pkGeniusCar').collection('services')
     const orderCollection = client.db('pkGeniusCar').collection('orderPK1')
      
+     /* create jwt token and send client side login page and localStorage set */
+      app.post('/login', async (req, res) => {
+         const user = req.body 
+         const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+          expiresIn: '1d'
+         })
+         console.log(user);
+         console.log(accessToken);
+         res.send({accessToken}) 
+      })
+
     /* get user all database store server for client */
      app.get('/service', async (req, res) => {
         const query = {}
