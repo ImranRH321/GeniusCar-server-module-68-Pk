@@ -6,10 +6,11 @@
  * 2. verify email
  * 3. install heroku cli
  * 4. heroku login
- *                                                hii
+ *                                                
  * --------------------
  * For each project one time
  * --------------------------
+ *  * 1. heroku login
  * 1. heroku create project name 
  * 2. make sure you: git add . git commit. git push
  * 3. git push heroku main
